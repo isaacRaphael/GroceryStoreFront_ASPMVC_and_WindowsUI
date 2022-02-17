@@ -184,6 +184,7 @@ namespace GroceryStoreFrront
                 Display_screen.Text = "";
                 CurrentCart.Clear();
                 cart_tot_text.Text = "Cart Total: 0";
+                MessageBox.Show("Cart Cleared");
 
             }
         }
