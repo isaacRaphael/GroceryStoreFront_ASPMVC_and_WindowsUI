@@ -20,20 +20,7 @@ namespace GroceryStoreFrront
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Username_TextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void Log_In_Btn_Click(object sender, EventArgs e)
         {
@@ -75,7 +62,20 @@ namespace GroceryStoreFrront
         {
 
         }
+        private void label2_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Username_TextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
         //public static implicit operator Form2(Grocery_store v)
         //{
         //    throw new NotImplementedException();

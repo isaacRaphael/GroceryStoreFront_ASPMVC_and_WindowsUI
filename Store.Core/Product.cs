@@ -10,11 +10,19 @@ namespace Store.Core
     {
         public Product(string productName, int quantity = 0)
         {
-            Id = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid().ToString().Substring(0,12);
             Name = productName;
             Quantity = quantity;
         }
-        public string Id { get; }
+
+        public Product(string productName, string id, decimal price, int quantity = 0)
+        {
+            Id = id;
+            Name = productName;
+            Quantity = quantity;
+            Price = price;
+        }
+        public string Id { get; private set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }

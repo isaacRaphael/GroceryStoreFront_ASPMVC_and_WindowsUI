@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Store.Core
-{
+{   public interface IUser
+    {
+         Role UserRole { get; set; }
+    }
 
-    public class User
+    public class User : IUser
     {
 
         public User(string x)

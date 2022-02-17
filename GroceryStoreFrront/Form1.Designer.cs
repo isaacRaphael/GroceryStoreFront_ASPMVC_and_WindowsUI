@@ -47,14 +47,24 @@
             this.Val2_Label = new System.Windows.Forms.Label();
             this.Status = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.Print_Status = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.RemoveProd_TextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.Remove_Btn = new System.Windows.Forms.Button();
+            this.quantity_input_box = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.Print_Status = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.cart_tot_text = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.Cart_Clear_Btn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.quantity_input_box)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -72,6 +82,7 @@
             // 
             this.ProductText.AutoSize = true;
             this.ProductText.Font = new System.Drawing.Font("Product Sans Medium", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProductText.ForeColor = System.Drawing.Color.Maroon;
             this.ProductText.Location = new System.Drawing.Point(29, 75);
             this.ProductText.Name = "ProductText";
             this.ProductText.Size = new System.Drawing.Size(109, 14);
@@ -115,9 +126,9 @@
             // 
             // Display_screen
             // 
-            this.Display_screen.Location = new System.Drawing.Point(311, 92);
+            this.Display_screen.Location = new System.Drawing.Point(311, 167);
             this.Display_screen.Name = "Display_screen";
-            this.Display_screen.Size = new System.Drawing.Size(274, 328);
+            this.Display_screen.Size = new System.Drawing.Size(274, 256);
             this.Display_screen.TabIndex = 5;
             this.Display_screen.Text = "";
             this.Display_screen.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -162,6 +173,7 @@
             // 
             this.Available_Prod.AutoSize = true;
             this.Available_Prod.Font = new System.Drawing.Font("Product Sans Medium", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Available_Prod.ForeColor = System.Drawing.Color.Maroon;
             this.Available_Prod.Location = new System.Drawing.Point(29, 152);
             this.Available_Prod.MaximumSize = new System.Drawing.Size(0, 100);
             this.Available_Prod.Name = "Available_Prod";
@@ -253,21 +265,12 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Product Sans Medium", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Maroon;
             this.label4.Location = new System.Drawing.Point(29, 306);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 14);
             this.label4.TabIndex = 18;
             this.label4.Text = "Add New :";
-            // 
-            // Print_Status
-            // 
-            this.Print_Status.AutoSize = true;
-            this.Print_Status.ForeColor = System.Drawing.Color.Green;
-            this.Print_Status.Location = new System.Drawing.Point(308, 299);
-            this.Print_Status.Name = "Print_Status";
-            this.Print_Status.Size = new System.Drawing.Size(0, 13);
-            this.Print_Status.TabIndex = 19;
-            this.Print_Status.Click += new System.EventHandler(this.Print_Status_Click);
             // 
             // panel1
             // 
@@ -300,6 +303,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Product Sans Medium", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Maroon;
             this.label6.Location = new System.Drawing.Point(30, 383);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 14);
@@ -320,13 +324,101 @@
             this.Remove_Btn.UseVisualStyleBackColor = false;
             this.Remove_Btn.Click += new System.EventHandler(this.Remove_Btn_Click);
             // 
+            // quantity_input_box
+            // 
+            this.quantity_input_box.Location = new System.Drawing.Point(70, 353);
+            this.quantity_input_box.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
+            this.quantity_input_box.Name = "quantity_input_box";
+            this.quantity_input_box.Size = new System.Drawing.Size(92, 20);
+            this.quantity_input_box.TabIndex = 26;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Product Sans Medium", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(31, 357);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(29, 14);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "Qty";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Maroon;
+            this.panel3.Controls.Add(this.Cart_Clear_Btn);
+            this.panel3.Controls.Add(this.label8);
+            this.panel3.Location = new System.Drawing.Point(311, 129);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(274, 30);
+            this.panel3.TabIndex = 28;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Product Sans Medium", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(14, 4);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(57, 26);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Cart";
+            // 
+            // Print_Status
+            // 
+            this.Print_Status.AutoSize = true;
+            this.Print_Status.ForeColor = System.Drawing.Color.Green;
+            this.Print_Status.Location = new System.Drawing.Point(507, 461);
+            this.Print_Status.Name = "Print_Status";
+            this.Print_Status.Size = new System.Drawing.Size(0, 13);
+            this.Print_Status.TabIndex = 19;
+            this.Print_Status.Click += new System.EventHandler(this.Print_Status_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Maroon;
+            this.panel4.Controls.Add(this.cart_tot_text);
+            this.panel4.Location = new System.Drawing.Point(311, 429);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(174, 23);
+            this.panel4.TabIndex = 29;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
+            // 
+            // cart_tot_text
+            // 
+            this.cart_tot_text.AutoSize = true;
+            this.cart_tot_text.Font = new System.Drawing.Font("Product Sans Medium", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cart_tot_text.ForeColor = System.Drawing.Color.White;
+            this.cart_tot_text.Location = new System.Drawing.Point(3, 4);
+            this.cart_tot_text.Name = "cart_tot_text";
+            this.cart_tot_text.Size = new System.Drawing.Size(91, 17);
+            this.cart_tot_text.TabIndex = 0;
+            this.cart_tot_text.Text = "Cart Total: 0";
+            // 
             // panel2
             // 
-            this.panel2.Location = new System.Drawing.Point(32, 309);
+            this.panel2.Location = new System.Drawing.Point(31, 306);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(255, 143);
-            this.panel2.TabIndex = 25;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            this.panel2.Size = new System.Drawing.Size(256, 165);
+            this.panel2.TabIndex = 30;
+            // 
+            // Cart_Clear_Btn
+            // 
+            this.Cart_Clear_Btn.BackColor = System.Drawing.Color.White;
+            this.Cart_Clear_Btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Cart_Clear_Btn.Font = new System.Drawing.Font("Product Sans Medium", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cart_Clear_Btn.ForeColor = System.Drawing.Color.Maroon;
+            this.Cart_Clear_Btn.Location = new System.Drawing.Point(214, 4);
+            this.Cart_Clear_Btn.Name = "Cart_Clear_Btn";
+            this.Cart_Clear_Btn.Size = new System.Drawing.Size(51, 22);
+            this.Cart_Clear_Btn.TabIndex = 1;
+            this.Cart_Clear_Btn.Text = "Clear";
+            this.Cart_Clear_Btn.UseVisualStyleBackColor = false;
+            this.Cart_Clear_Btn.Click += new System.EventHandler(this.Cart_Clear_Btn_Click);
             // 
             // Grocery_store
             // 
@@ -335,6 +427,10 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(614, 483);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.quantity_input_box);
             this.Controls.Add(this.Remove_Btn);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -360,10 +456,16 @@
             this.Controls.Add(this.Product_textBox);
             this.Controls.Add(this.ProductText);
             this.Name = "Grocery_store";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Grocery Store";
             this.Load += new System.EventHandler(this.Grocery_store_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.quantity_input_box)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -390,13 +492,20 @@
         private System.Windows.Forms.Label Val2_Label;
         private System.Windows.Forms.Label Status;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label Print_Status;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox RemoveProd_TextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button Remove_Btn;
+        private System.Windows.Forms.NumericUpDown quantity_input_box;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label Print_Status;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label cart_tot_text;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button Cart_Clear_Btn;
     }
 }
 
