@@ -28,7 +28,7 @@ namespace GroceryStoreFrront
             string staffPass = "access2";
 
 
-            if (Username_TextBox.Text.ToLower() == "admin" && Password_TextBox.Text.ToString() == ManagerPass)
+            if (Username_TextBox.Text.Trim().ToLower() == "manager" && Password_TextBox.Text.ToString() == ManagerPass)
             {
                 
                 Grocery_store f2 = new Grocery_store(new Store.Core.Store(), new User("m"));
@@ -38,7 +38,7 @@ namespace GroceryStoreFrront
             }
                
             //Application.Run(new Grocery_store(new Store.Core.Store(), new User("m")));
-            else if (Username_TextBox.Text.ToLower() == "admin" && Password_TextBox.Text.ToString() == staffPass)
+            else if (Username_TextBox.Text.ToLower() == "staff" && Password_TextBox.Text.ToString() == staffPass)
             {
                 
                 Grocery_store f3 = new Grocery_store(new Store.Core.Store(), new User("f"));
