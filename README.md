@@ -7,7 +7,7 @@ A Windows Form app Handling a Grocery's store checkout (c#)
 
 >Manager Login
 
-*Username : admin
+*Username : manager
 
 *Password : access1
 
@@ -15,7 +15,7 @@ A Windows Form app Handling a Grocery's store checkout (c#)
 
 >Staff Login
 
-*Username : admin
+*Username : staff
 
 *Password : access2
 
