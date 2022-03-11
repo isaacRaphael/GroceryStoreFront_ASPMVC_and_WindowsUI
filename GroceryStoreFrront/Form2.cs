@@ -8,15 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Store.Core;
+using Store.Core.Services;
 
 namespace GroceryStoreFrront
 {
     public partial class Form2 : Form 
     {
-
-        public Form2()
+        private readonly IPopulateProductService _populate;
+        private readonly ILoginService _loginService;
+        private IAddProdToDbService _addProdToDbService1;
+        public Form2(IPopulateProductService populate, ILoginService loginService, IAddProdToDbService addProdToDbService)
         {
-            
+            _populate = populate;
+            _loginService = loginService;
+            _addProdToDbService1 = addProdToDbService;
             InitializeComponent();
         }
 
@@ -24,38 +29,30 @@ namespace GroceryStoreFrront
 
         private void Log_In_Btn_Click(object sender, EventArgs e)
         {
-            string ManagerPass = "access1";
-            string staffPass = "access2";
+            var userUsername = Username_TextBox.Text.Trim().ToLower();
+            var userPassword = Password_TextBox.Text.ToString();
+            var checker = _loginService.ValidateLogIn(userUsername,userPassword);
+           
 
 
-            if (Username_TextBox.Text.Trim().ToLower() == "manager" && Password_TextBox.Text.ToString() == ManagerPass)
-            {
-                
-                Grocery_store f2 = new Grocery_store(new Store.Core.Store(), new User("m"));
+            if (checker)
+            { 
+                Grocery_store f2 = new Grocery_store(new Store.Core.Store(_populate), new User(userUsername), _addProdToDbService1);
                 f2.Show();
-                Username_TextBox.Text = "";
-                Password_TextBox.Text = "";
-            }
-               
-            //Application.Run(new Grocery_store(new Store.Core.Store(), new User("m")));
-            else if (Username_TextBox.Text.ToLower() == "staff" && Password_TextBox.Text.ToString() == staffPass)
-            {
-                
-                Grocery_store f3 = new Grocery_store(new Store.Core.Store(), new User("f"));
-                f3.Show();
-                Username_TextBox.Text = "";
-                Password_TextBox.Text = "";
-            }
-               
+                ClearFields();
+            }   
             else
             {
-                Username_TextBox.Text = "";
-                Password_TextBox.Text = "";
-                Val_Text.Text = "Invalid Input";
-
+                ClearFields();
+                MessageBox.Show("Invalid Input");
             }
                 
 
+        }
+        public void ClearFields()
+        {
+            Username_TextBox.Text = "";
+            Password_TextBox.Text = "";
         }
 
         private void Val_Text_Click(object sender, EventArgs e)

@@ -41,13 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckOut.cs" />
-    <Compile Include="Role.cs" />
-    <Compile Include="SProgram.cs" />
-    <Compile Include="Product.cs" />
-    <Compile Include="Store.cs" />
+    <Compile Include="Contracts\IProductRepository.cs" />
+    <Compile Include="Contracts\ILoginRepository.cs" />
+    <Compile Include="DataAccess\LoginRepository.cs" />
+    <Compile Include="Models\CheckOut.cs" />
+    <Compile Include="Contracts\IStore.cs" />
+    <Compile Include="Contracts\IStoreManager.cs" />
+    <Compile Include="Contracts\IStoreStaff.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="DataAccess\ProductRepository.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Contracts\IPopulate.cs" />
+    <Compile Include="Contracts\IPopulateProductService.cs" />
+    <Compile Include="Contracts\ILoginService.cs" />
+    <Compile Include="Services\AddProdToDbService.cs" />
+    <Compile Include="Contracts\IAddProdToDbService.cs" />
+    <Compile Include="Services\LoginService.cs" />
+    <Compile Include="Services\PopulateProductService.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

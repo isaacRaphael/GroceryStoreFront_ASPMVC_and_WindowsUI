@@ -9,22 +9,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using Store.Core.Services;
 
 namespace GroceryStoreFrront
 {
     public partial class Grocery_store : Form
     {
+        private IAddProdToDbService _addProdToDbService1;
         public IStore _store;
         public IUser _user;
         public List<Product> CurrentCart { get; set; } = new List<Product>();
         public List<decimal> Totals = new List<decimal>();
 
         public  int ProdCount { get; set; }
-        public Grocery_store(IStore store, IUser user)
+        public Grocery_store(IStore store, IUser user, IAddProdToDbService addProdToDbService)
         {   
             InitializeComponent();
             _store = store;
             _user = user;
+            _addProdToDbService1 = addProdToDbService;
             ProdCount = 0;
             Product_Count.Text = ProdCount.ToString();
             Prod_Disp_Screen.Text = PrintProds(_store.Products);
@@ -100,8 +103,11 @@ namespace GroceryStoreFrront
         {
             if (_user.UserRole == Role.Manager)
             {
-                _store.Products.Add(new Product(New_ProdName_TextBox.Text, (int)quantity_input_box.Value) { Price = Convert.ToDecimal(New_ProdPrice_TextBox.Text) });
+                var prod = new Product(New_ProdName_TextBox.Text, (int)quantity_input_box.Value) { Price = Convert.ToDecimal(New_ProdPrice_TextBox.Text) };
+                _store.Products.Add(prod);
                 Prod_Disp_Screen.Text = PrintProds(_store.Products);
+
+                _addProdToDbService1.AddProdToDb(prod.Id, prod.Name, prod.Price, prod.Quantity);
                 New_ProdName_TextBox.Text = "";
                 New_ProdPrice_TextBox.Text = "";
                 quantity_input_box.Value = 0;
