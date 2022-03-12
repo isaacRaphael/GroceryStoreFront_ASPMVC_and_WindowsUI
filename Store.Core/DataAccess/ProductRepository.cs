@@ -31,13 +31,7 @@ namespace Store.Core
                 {
                     while (reader.Read())
                     {
-                        DefaultProducts.Add(new Product(reader.GetString(0))
-                        {
-                            Name = reader.GetString(1),
-                            Price = reader.GetInt32(2),
-                            Quantity = reader.GetInt32(3)
-                        }
-                        );
+                        DefaultProducts.Add(new Product(reader.GetString(1),reader.GetString(0), reader.GetInt32(2),reader.GetInt32(3)));
                     }
                 }
 
@@ -63,6 +57,36 @@ namespace Store.Core
 
             return result;
 
+        }
+        public bool RemoveFromProducts(string id)
+        {
+            bool result;
+            using (connection = new SqlConnection(_conStrn))
+            {
+                var sql = $"delete from tbproducts where id = '{id}';";
+                command = new SqlCommand(sql, connection);
+                connection.Open();
+
+                var response = command.ExecuteNonQuery();
+                result = response == 1 ? true : false;
+                
+            }
+            return result;
+        }
+
+        public bool UpdateDbOnCheckOut(string id, int qty)
+        {
+            bool result;
+            using (connection = new SqlConnection(_conStrn))
+            {
+                var sql = $"update tbproducts set quantity = {qty} where id = '{id}';";
+                command = new SqlCommand(sql, connection);
+                connection.Open();
+
+                var response = command.ExecuteNonQuery();
+                result = response == 1 ? true : false;
+            }
+            return result;
         }
     }
 }

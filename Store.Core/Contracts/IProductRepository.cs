@@ -7,5 +7,9 @@ namespace Store.Core
     {
         List<Product> CreateProducts();
         bool AddToProducts(string id, string prodName, decimal prodPrice, int qty);
+        bool RemoveFromProducts(string id);
+        bool UpdateDbOnCheckOut(string id, int qty);
+
+        
     }
 }

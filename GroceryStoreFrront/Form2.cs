@@ -16,12 +16,20 @@ namespace GroceryStoreFrront
     {
         private readonly IPopulateProductService _populate;
         private readonly ILoginService _loginService;
-        private IAddProdToDbService _addProdToDbService1;
-        public Form2(IPopulateProductService populate, ILoginService loginService, IAddProdToDbService addProdToDbService)
+        private readonly IAddProdToDbService _addProdToDbService1;
+        private readonly IRemoveProdFromDbService _removeProdFromDbService;
+        private readonly IUpdateDbOnCkeckOutService _updateDbOnCkeckOutService;
+        public Form2(IPopulateProductService populate,
+                      ILoginService loginService, 
+                      IAddProdToDbService addProdToDbService,
+                      IRemoveProdFromDbService removeProdFromDbService, 
+                      IUpdateDbOnCkeckOutService updateDbOnCkeckOutService)
         {
             _populate = populate;
             _loginService = loginService;
             _addProdToDbService1 = addProdToDbService;
+            _removeProdFromDbService = removeProdFromDbService;
+            _updateDbOnCkeckOutService = updateDbOnCkeckOutService;
             InitializeComponent();
         }
 
@@ -37,7 +45,11 @@ namespace GroceryStoreFrront
 
             if (checker)
             { 
-                Grocery_store f2 = new Grocery_store(new Store.Core.Store(_populate), new User(userUsername), _addProdToDbService1);
+                Grocery_store f2 = new Grocery_store(new Store.Core.Store(_populate), 
+                                                     new User(userUsername),
+                                                     _addProdToDbService1,
+                                                     _removeProdFromDbService,
+                                                     _updateDbOnCkeckOutService);
                 f2.Show();
                 ClearFields();
             }   

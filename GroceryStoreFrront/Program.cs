@@ -21,7 +21,11 @@ namespace GroceryStoreFrront
             Application.SetCompatibleTextRenderingDefault(false);
             var ProductRepo = new ProductRepository();
 
-            Application.Run(new Form2(new PopulateProductService(ProductRepo), new LoginService(new LoginRepository()),new AddProdToDbService(ProductRepo)));
+            Application.Run(new Form2(new PopulateProductService(ProductRepo), 
+                                      new LoginService(new LoginRepository()),
+                                      new AddProdToDbService(ProductRepo),
+                                      new RemoveProdFromDbService(ProductRepo),
+                                      new UpdateDbOnCkeckOutService(ProductRepo)));
 
             //Application.Run(new Grocery_store(new Store.Core.Store()));
         }

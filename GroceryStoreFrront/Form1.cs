@@ -16,18 +16,26 @@ namespace GroceryStoreFrront
     public partial class Grocery_store : Form
     {
         private IAddProdToDbService _addProdToDbService1;
+        private IRemoveProdFromDbService _removeProdFromDbService;
+        private IUpdateDbOnCkeckOutService _updateDbOnCkeckOutService;
         public IStore _store;
         public IUser _user;
         public List<Product> CurrentCart { get; set; } = new List<Product>();
         public List<decimal> Totals = new List<decimal>();
 
         public  int ProdCount { get; set; }
-        public Grocery_store(IStore store, IUser user, IAddProdToDbService addProdToDbService)
+        public Grocery_store(IStore store,
+                             IUser user, 
+                             IAddProdToDbService addProdToDbService, 
+                             IRemoveProdFromDbService removeProdFromDbService, 
+                             IUpdateDbOnCkeckOutService updateDbOnCkeckOutService)
         {   
             InitializeComponent();
             _store = store;
             _user = user;
             _addProdToDbService1 = addProdToDbService;
+            _removeProdFromDbService = removeProdFromDbService;
+            _updateDbOnCkeckOutService = updateDbOnCkeckOutService;
             ProdCount = 0;
             Product_Count.Text = ProdCount.ToString();
             Prod_Disp_Screen.Text = PrintProds(_store.Products);
@@ -61,23 +69,17 @@ namespace GroceryStoreFrront
 
         private void Enter_Btn_Click(object sender, EventArgs e)
         {
-
-
             string productId = Product_textBox.Text.Trim();
             Product product = _store.GetProduct(productId);
             if (product == null)
                 return;
-
-
-            AddProdToCurCart(product);
-            
+            AddProdToCurCart(product);  
             RenderCart();
-            
+
             cart_tot_text.Text = "Cart Total: ₦ " + CurrentCart.Sum(prod => (prod.Quantity * prod.Price));
             product.Quantity = product.Quantity - ProdCount;
             Prod_Disp_Screen.Text = PrintProds(_store.Products);
             Totals.Clear();
-
 
             Reset();
         }
@@ -134,6 +136,10 @@ namespace GroceryStoreFrront
 
                 cart_tot_text.Text = "Cart Total: 0";
                 MessageBox.Show($"A new File {fileUniqueName} Printed Successfully");
+                foreach(var prod in _store.Products)
+                {
+                    _updateDbOnCkeckOutService.UpdateOnChechOut(prod.Id,prod.Quantity);
+                }
                 CurrentCart.Clear();
             }  
         }
@@ -145,10 +151,12 @@ namespace GroceryStoreFrront
             if (checkProd != null )
             {
                 _store.DeleteProduct(prodRemId);
+                _removeProdFromDbService.RemoveProd(prodRemId);
                 RemoveProd_TextBox.Text = "";
                 Prod_Disp_Screen.Text = PrintProds(_store.Products);
             }
             MessageBox.Show("Product Removed Successfully");
+           
         }
         public void RenderCart()
         {
@@ -167,11 +175,7 @@ namespace GroceryStoreFrront
             var prodToCheck = CurrentCart.Find(k => k.Id == pd.Id);
 
             if (prodToCheck == null)
-            {
-                //pd.Quantity = ProdCount;
                 CurrentCart.Add(new Product(pd.Name, pd.Id.ToString(), pd.Price, ProdCount) { Price = pd.Price }); 
-            }
-                
             else
                 prodToCheck.Quantity += ProdCount;
         }
