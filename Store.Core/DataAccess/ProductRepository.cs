@@ -13,8 +13,6 @@ namespace Store.Core
         SqlConnection connection;
         SqlCommand command;
         SqlDataReader reader;
-        SqlDataAdapter adapter;
-        DataTable table;
         private string _conStrn = @"Data Source = .\SQLEXPRESS;Initial Catalog = dbgrocery_store_products; Integrated Security = True";
         public  List<Product> CreateProducts()
         {
