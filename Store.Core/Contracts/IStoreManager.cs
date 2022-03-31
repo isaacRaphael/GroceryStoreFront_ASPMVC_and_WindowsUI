@@ -4,6 +4,7 @@ namespace Store.Core
 {
     public interface IStoreManager
     {
+        
         List<Product> Products { get; set; }
         double VAT { get; }
         void AddToProduct(string id, int numberChange);

@@ -14,7 +14,7 @@ namespace Store.Core
         SqlCommand command;
         SqlDataReader reader;
         private string _conStrn = @"Data Source = .\SQLEXPRESS;Initial Catalog = dbgrocery_store_products; Integrated Security = True";
-        public  List<Product> CreateProducts()
+        public  List<Product> GetProducts()
         {
             var DefaultProducts = new List<Product>();
             var sql = "select * from tbproducts;";
@@ -49,7 +49,7 @@ namespace Store.Core
                 connection.Open();
 
                 var response= command.ExecuteNonQuery();
-                result = response == 1 ? true : false;
+                result = response == 1;
 
             }
 

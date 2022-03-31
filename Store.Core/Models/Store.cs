@@ -14,6 +14,7 @@ namespace Store.Core
         
         public List<Product> Products { get; set; } 
         public double VAT { get; private set; }
+        public User User { get; set; }
 
         public Store(IPopulateProductService populate)
         {

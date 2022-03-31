@@ -5,7 +5,7 @@ namespace Store.Core
 {
     public interface IProductRepository
     {
-        List<Product> CreateProducts();
+        List<Product> GetProducts();
         bool AddToProducts(string id, string prodName, decimal prodPrice, int qty);
         bool RemoveFromProducts(string id);
         bool UpdateDbOnCheckOut(string id, int qty);

@@ -51,6 +51,7 @@ namespace GroceryStoreFrront
                                                      _removeProdFromDbService,
                                                      _updateDbOnCkeckOutService);
                 f2.Show();
+                this.Hide();
                 ClearFields();
             }   
             else
