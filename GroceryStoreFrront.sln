@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroceryStoreFrront", "Groce
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store.Core", "Store.Core\Store.Core.csproj", "{E5066C76-A8F7-4410-B52D-FA8D5A30CD7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GroceryStoreWebUI", "GroceryStoreWebUI\GroceryStoreWebUI.csproj", "{54D0484B-DF01-475B-AD3B-35042B7EC00F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroceryStoreWebUI", "GroceryStoreWebUI\GroceryStoreWebUI.csproj", "{54D0484B-DF01-475B-AD3B-35042B7EC00F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

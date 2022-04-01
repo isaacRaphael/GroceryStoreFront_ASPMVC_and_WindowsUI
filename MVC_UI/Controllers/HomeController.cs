@@ -1,8 +1,7 @@
-﻿using GroceryStoreWebUI.Models;
+﻿using MVC_UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Store.Core;
-using Store.Core.Models;
 using Store.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -16,25 +15,20 @@ namespace GroceryStoreWebUI.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ILoginService _loginService;
-        private readonly ICartService _cartService;
-        private readonly IAddProdToDbService _addProdToDbService;
         private readonly IStore _store;
         private readonly CartItem _cartItem;
 
+        public List<CartItem> Items { get; set; } = new();
 
-        public HomeController(ILogger<HomeController> logger,
-            ILoginService loginService,
-            ICartService cartService, 
-            IStore store,
-            IAddProdToDbService addProdToDbService)
+
+
+
+        public HomeController(ILogger<HomeController> logger, ILoginService loginService, IStore store)
         {
             _logger = logger;
             _loginService = loginService;
             _store = store;
-            _cartService = cartService;
-            _cartItem = new CartItem() { Products = _store.Products, User =_store.User };
-            _addProdToDbService = addProdToDbService;
-           
+            _cartItem = new CartItem() { Products = _store.Products };
         }
 
 
@@ -43,43 +37,10 @@ namespace GroceryStoreWebUI.Controllers
         {
             return View();
         }
-        
-        
-        //CreateProd Get
-        public IActionResult CreateProd()
-        {
-            return View();
-        }
-
-        //CreateProd Post
-        [HttpPost]
-        [AutoValidateAntiforgeryToken]
-        public IActionResult CreateProd(CartItem item)
-        {
-            var prod = new Product(item.Name)
-            {
-                Quantity = item.Quantity,
-                Price = item.Price
-            };
-            _addProdToDbService.AddProdToDb(prod.Id, prod.Name, prod.Price, prod.Quantity);
-            return RedirectToAction("StoreFront");
-        }
 
         public IActionResult CartItems()
         {
-            var CartList = new List<CartItem>();
-            var Items = _cartService.GetCart();
-            foreach(var item in Items)
-            {
-                CartList.Add(new CartItem()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Price = item.Price,
-                    Quantity = item.Quantity
-                });
-            }
-            return View(CartList);
+            return View(Items);
         }
 
 
@@ -106,24 +67,10 @@ namespace GroceryStoreWebUI.Controllers
         [AutoValidateAntiforgeryToken]
         public IActionResult CartAdd(CartItem cartItem)
         {
-            var pass = new CartDTO()
-            {
-                Id = cartItem.Id,
-                Name = cartItem.Name,
-                Price = cartItem.Price,
-                Quantity = cartItem.Quantity
-            };
-
             if (ModelState.IsValid)
-                _cartService.Add(pass);
+                Items.Add(cartItem);
 
             return RedirectToAction("StoreFront", _cartItem);
-        }
-
-        public IActionResult Back()
-        {
-            _cartService.ClearCart();
-            return RedirectToAction("StoreFront");
         }
         public IActionResult StoreFront()
         {

@@ -41,9 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ICartRepository.cs" />
     <Compile Include="Contracts\IProductRepository.cs" />
     <Compile Include="Contracts\ILoginRepository.cs" />
+    <Compile Include="DataAccess\CartRepository.cs" />
     <Compile Include="DataAccess\LoginRepository.cs" />
+    <Compile Include="Models\CartDTO.cs" />
     <Compile Include="Models\CheckOut.cs" />
     <Compile Include="Contracts\IStore.cs" />
     <Compile Include="Contracts\IStoreManager.cs" />
@@ -61,6 +64,8 @@
     <Compile Include="Contracts\IAddProdToDbService.cs" />
     <Compile Include="Contracts\IRemoveProdFromDbService.cs" />
     <Compile Include="Contracts\IUpdateDbOnCkeckOutService.cs" />
+    <Compile Include="Services\CartService.cs" />
+    <Compile Include="Contracts\ICartService.cs" />
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Services\PopulateProductService.cs" />
     <Compile Include="Services\RemoveProdFromDbService.cs" />

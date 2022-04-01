@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "CreateProd";
+}
+@model CartItem
+
+    <div class="d-flex w-100 justify-content-center align-items-center mt-5" >
+        <img class="img-fluid w-25" src="https://i.postimg.cc/qMKPtqSS/clip-online-products-shopping-1.png" alt="Alternate Text" />
+    </div>
+<form method="post" asp-action="CreateProd" class="mt-5">
+
+    <div class="border p-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <h1 class="text-danger pl-3">Add New Product</h1>
+        </div>
+        <div class="ml-1 row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Name" required class="form-control" />
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Price"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Price" required class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Quantity"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Quantity" required class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row justify-content-end">
+
+                        <div class="col">
+                            <button type="submit" class="btn btn-danger">Create</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                @* Keep this empty *@
+            </div>
+        </div>
+
+    </div>
+
+
+</form>
+

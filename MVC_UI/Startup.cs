@@ -4,15 +4,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Store.Core;
-using Store.Core.DataAccess;
-using Store.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GroceryStoreWebUI
+namespace MVC_UI
 {
     public class Startup
     {
@@ -27,12 +24,6 @@ namespace GroceryStoreWebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            var prodRepo = new ProductRepository();
-            services.AddScoped<IAddProdToDbService>(x => new AddProdToDbService(prodRepo));
-            services.AddScoped<ICartService>(x => new CartService(new CartRepository()));
-            services.AddScoped<ILoginService>(x => new LoginService(new LoginRepository()));
-            services.AddScoped<IStore>(x => new Store.Core.Store(new PopulateProductService(prodRepo)));
-            //services.AddScoped<IStore>(x => new Store.Core.Store(new PopulateProductService(new ProductRepository())));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

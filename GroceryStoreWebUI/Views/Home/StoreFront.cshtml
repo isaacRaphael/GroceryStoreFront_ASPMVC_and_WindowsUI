@@ -1,7 +1,263 @@
-﻿
+﻿@model CartItem
 @{
+
     ViewData["Title"] = "StoreFront";
 }
+<style>
+    i {
+        cursor: pointer;
+    }
+</style>
+<script type="text/javascript">
 
-<h1>StoreFront</h1>
+    document.addEventListener("DOMContentLoaded", () => {
+        const prodId = document.querySelector("#prodId");
+        const select = document.querySelector(".dropdown");
+        const Quantity = document.querySelector("#Quantity");
+        const Total = document.querySelector("#txtTotal");
+        const Btn = document.querySelector("#btnAddToList");
+        const UnitPrice = document.querySelector("#txtUnitPrice");
+        const form = document.querySelector("#form");
+        const Count = document.querySelector("#cartCount");
 
+
+
+        select.addEventListener('change', (e) => {
+            prodId.value = e.target.options[select.selectedIndex].dataset.id;
+            Quantity.value = 1;
+            UnitPrice.value = e.target.options[select.selectedIndex].dataset.price;
+            Total.value = (UnitPrice.value * Quantity.value);
+
+        })
+        Quantity.addEventListener("change", (e) => {
+            e.preventDefault();
+            Total.value = (UnitPrice.value * Quantity.value);
+        })
+        form.addEventListener("submit", (e) => {
+            alert("item added")
+        })
+    })
+
+
+
+</script>
+
+
+<div class="w-100 d-flex justify-content-center">
+    <img class="img-fluid mx-auto w-25" src="https://freedesignfile.com/upload/2019/11/Mobile-phone-shopping-illustration-vector.jpg" alt="Alternate Text" />
+    <a asp-controller="Home" asp-action="CartItems" style="justify-self: end!important; width:80px;" class="d-flex justify-content-end align-items-center">
+        <div class="lead text-warning mr-2 font-weight-bold">Cart</div>
+        <i style="font-size: 30px" class="fa-solid fa-bag-shopping text-danger"></i>
+    </a>
+</div>
+
+<fieldset class="mt-2">
+    <div class="d-flex justify-content-sm-between align-items-center">
+        <h4 class="text-danger ml-2">
+            Store Items
+        </h4>
+    </div>
+    <form asp-controller="Home" asp-action="CartAdd" method="post" class="container" id="form">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    Items :
+                    <select asp-for="Name" id="select" value="" class="form-control dropdown">
+                        <option></option>
+                        @foreach (var prod in Model.Products)
+                        {
+                            <option data-id=@prod.Id data-quantity=@prod.Quantity data-price=@prod.Price>@prod.Name</option>
+                        }
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    Product Id :
+                    <input asp-for="Id" type="text" readonly="readonly" name="Id" value="" id="prodId" class="form-control text-right" />
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    Unit Price (₦):
+                    <input asp-for="Price" type="text" readonly="readonly" name="Price" value="0.00" id="txtUnitPrice" class="form-control text-right" />
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    Quantity :
+                    <input asp-for="Quantity" name="Quantity" type="number" value="0" id="Quantity" class="form-control text-left" />
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    Total (₦):
+                    <input asp-for="Total" type="text" readonly="readonly" name="Total" value="0.00" id="txtTotal" class="form-control text-right" />
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    <input type="submit" id="btnAddToList" value="Add To Cart" class="btn btn-danger mt-4">
+
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>
+
+@if (@Model is not null)
+{
+    <style>
+        .fab-container {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+        }
+
+            .fab-container:hover {
+                height: 100%;
+            }
+
+                .fab-container:hover .sub-button:nth-child(2) {
+                    -webkit-transform: translateY(-80px);
+                    transform: translateY(-80px);
+                }
+
+                .fab-container:hover .sub-button:nth-child(3) {
+                    -webkit-transform: translateY(-140px);
+                    transform: translateY(-140px);
+                }
+
+                .fab-container:hover .sub-button:nth-child(4) {
+                    -webkit-transform: translateY(-200px);
+                    transform: translateY(-200px);
+                }
+
+                .fab-container:hover .sub-button:nth-child(5) {
+                    -webkit-transform: translateY(-260px);
+                    transform: translateY(-260px);
+                }
+
+                .fab-container:hover .sub-button:nth-child(6) {
+                    -webkit-transform: translateY(-320px);
+                    transform: translateY(-320px);
+                }
+
+            .fab-container .fab {
+                position: relative;
+                height: 70px;
+                width: 70px;
+                
+                border-radius: 50%;
+                z-index: 2;
+            }
+
+                .fab-container .fab::before {
+                    content: " ";
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    height: 35px;
+                    width: 35px;
+                    background-color: inherit;
+                    border-radius: 0 0 10px 0;
+                    z-index: -1;
+                }
+
+                .fab-container .fab .fab-content {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 50%;
+                }
+
+                    .fab-container .fab .fab-content i{
+                        color: white;
+                        font-size: 38px;
+                    }
+
+            .fab-container .sub-button {
+                position: absolute;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                bottom: 10px;
+                right: 10px;
+                height: 50px;
+                width: 50px;
+                background-color: #4ba2ff;
+                border-radius: 50%;
+                -webkit-transition: all .3s ease;
+                transition: all .3s ease;
+            }
+
+                .fab-container .sub-button:hover {
+                    cursor: pointer;
+                }
+
+                .fab-container .sub-button .material-icons {
+                    color: white;
+                    padding-top: 6px;
+                }
+    </style>
+
+    <div class="fab-container">
+        <div class="fab bg-danger shadow">
+            <div class="fab-content">
+                <span style="width :40px" class="material-icons"><i class="fa-solid fa-pen-to-square"></i></span>
+            </div>
+        </div>
+        <div class="sub-button shadow bg-danger">
+            <a asp-controller="Home" asp-action="CreateProd" target="_blank">
+                <span class="material-icons"><i class="fa-solid fa-plus"></i></span>
+            </a>
+        </div>
+        
+        <div class="sub-button shadow bg-danger">
+            <a href="google.com" target="_blank">
+                <span class="material-icons"><i class="fa-solid fa-circle-minus"></i></span>
+            </a>
+        </div>
+    </div>
+}
