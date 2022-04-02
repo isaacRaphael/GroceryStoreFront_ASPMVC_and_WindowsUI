@@ -28,6 +28,7 @@ namespace GroceryStoreWebUI
         {
             services.AddControllersWithViews();
             var prodRepo = new ProductRepository();
+            services.AddScoped<IRemoveProdFromDbService>(x => new RemoveProdFromDbService(prodRepo));
             services.AddScoped<IAddProdToDbService>(x => new AddProdToDbService(prodRepo));
             services.AddScoped<ICartService>(x => new CartService(new CartRepository()));
             services.AddScoped<ILoginService>(x => new LoginService(new LoginRepository()));

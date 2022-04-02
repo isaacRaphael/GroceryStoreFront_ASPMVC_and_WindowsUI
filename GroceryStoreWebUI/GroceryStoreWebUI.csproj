@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Store.Core\Store.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Receipts\" />
+  </ItemGroup>
+
 </Project>

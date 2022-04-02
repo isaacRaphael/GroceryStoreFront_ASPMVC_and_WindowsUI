@@ -7,6 +7,7 @@ using Store.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +19,7 @@ namespace GroceryStoreWebUI.Controllers
         private readonly ILoginService _loginService;
         private readonly ICartService _cartService;
         private readonly IAddProdToDbService _addProdToDbService;
+        private readonly IRemoveProdFromDbService _removeProdFromDbService;
         private readonly IStore _store;
         private readonly CartItem _cartItem;
 
@@ -26,6 +28,7 @@ namespace GroceryStoreWebUI.Controllers
             ILoginService loginService,
             ICartService cartService, 
             IStore store,
+            IRemoveProdFromDbService removeProdFromDbService,
             IAddProdToDbService addProdToDbService)
         {
             _logger = logger;
@@ -34,6 +37,7 @@ namespace GroceryStoreWebUI.Controllers
             _cartService = cartService;
             _cartItem = new CartItem() { Products = _store.Products, User =_store.User };
             _addProdToDbService = addProdToDbService;
+            _removeProdFromDbService = removeProdFromDbService;
            
         }
 
@@ -63,6 +67,45 @@ namespace GroceryStoreWebUI.Controllers
             };
             _addProdToDbService.AddProdToDb(prod.Id, prod.Name, prod.Price, prod.Quantity);
             return RedirectToAction("StoreFront");
+        }
+
+        //DeleteProd Get
+        public IActionResult DeleteProd()
+        {
+            return View();
+        }
+
+        //DeleteProd Post
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult DeleteProd(CartItem cartItem)
+        {
+            _removeProdFromDbService.RemoveProd(cartItem.Id);
+            return RedirectToAction("StoreFront");
+        }
+
+        public IActionResult Print()
+        {
+            var items = _cartService.GetCart();
+            var printOut = "";
+
+            foreach(var item in items)
+            {
+                printOut += $"Product: {item.Name}\n Quantity: {item.Quantity}\n Unit Price: {item.Price}\n Product Total: {item.Price * item.Quantity}\n";
+            }
+            printOut += $"Grand Total: {items.Sum(x => x.Price * x.Quantity)}";
+            
+            var fileUniqueName = Guid.NewGuid().ToString().Substring(0, 5);
+        
+            FileStream f = new FileStream($@"E:\Project Files\C# sandbox\VS_2017\GroceryStoreFront\GroceryStoreFront\GroceryStoreWebUI\Receipts\{fileUniqueName}receipt.txt", FileMode.Create);
+            StreamWriter s = new StreamWriter(f);
+
+            s.WriteLine(printOut);
+            s.Close();
+            f.Close();
+
+            _cartService.ClearCart();
+            return View(new CartItem() { Name = fileUniqueName });
         }
 
         public IActionResult CartItems()

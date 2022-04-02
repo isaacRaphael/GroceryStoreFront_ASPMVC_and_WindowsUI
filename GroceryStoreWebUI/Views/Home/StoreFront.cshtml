@@ -19,8 +19,15 @@
         const UnitPrice = document.querySelector("#txtUnitPrice");
         const form = document.querySelector("#form");
         const Count = document.querySelector("#cartCount");
+        const Uinfo = document.querySelector(".u-info");
+        const admintools = document.querySelector(".fab-container");
 
-
+        if (localStorage.getItem("login") === "true") {
+            Uinfo.innerText = "Signed in as Manager";
+        } else {
+            Uinfo.innerText = "Signed in as Staff";
+            admintools.classList.add("hide");
+        }
 
         select.addEventListener('change', (e) => {
             prodId.value = e.target.options[select.selectedIndex].dataset.id;
@@ -240,6 +247,10 @@
                     color: white;
                     padding-top: 6px;
                 }
+
+                .hide {
+                    display:none;
+                }
     </style>
 
     <div class="fab-container">
@@ -255,7 +266,7 @@
         </div>
         
         <div class="sub-button shadow bg-danger">
-            <a href="google.com" target="_blank">
+            <a asp-controller="Home" asp-action="DeleteProd" target="_blank">
                 <span class="material-icons"><i class="fa-solid fa-circle-minus"></i></span>
             </a>
         </div>

@@ -70,7 +70,7 @@
         <p class="text-success font-weight-bold">Total (₦):</p>
         <input value="@Model.Sum(x=> x.Quantity*x.Price)"type="text" readonly class="form-control" />
         <div class="ml-auto mt-3 text-white btn-group">
-            <a class="btn btn-success">Check Out</a>
+            <a asp-controller="Home" asp-action="Print" class="btn btn-success">Check Out</a>
         </div>
 
     }

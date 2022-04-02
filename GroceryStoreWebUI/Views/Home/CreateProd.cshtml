@@ -4,11 +4,11 @@
 }
 @model CartItem
 
-    <div class="d-flex w-100 justify-content-center align-items-center mt-5" >
-        <img class="img-fluid w-25" src="https://i.postimg.cc/qMKPtqSS/clip-online-products-shopping-1.png" alt="Alternate Text" />
-    </div>
+    
 <form method="post" asp-action="CreateProd" class="mt-5">
-
+    <div class="d-flex w-100 justify-content-end" >
+        <a asp-controller="Home" asp-action="StoreFront" class="btn btn-warning mb-2">Back to Store</a>
+    </div>
     <div class="border p-3">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -51,8 +51,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                @* Keep this empty *@
+            <div class="col-4 d-flex w-100 justify-content-center align-items-center">
+                <img class="img-fluid w-100" src="https://i.postimg.cc/qMKPtqSS/clip-online-products-shopping-1.png" alt="Alternate Text" />
             </div>
         </div>
 
