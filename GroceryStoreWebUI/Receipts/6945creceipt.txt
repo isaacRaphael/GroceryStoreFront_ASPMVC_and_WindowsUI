@@ -1,0 +1,9 @@
+Product: Milo
+ Quantity: 5
+ Unit Price: 1250
+ Product Total: 6250
+Product: Pop Corn
+ Quantity: 8
+ Unit Price: 9000
+ Product Total: 72000
+Grand Total: 78250
