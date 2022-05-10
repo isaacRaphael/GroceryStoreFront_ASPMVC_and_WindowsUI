@@ -1,0 +1,5 @@
+Product: Ije Garri
+ Quantity: 4
+ Unit Price: 300
+ Product Total: 1200
+Grand Total: 1200
